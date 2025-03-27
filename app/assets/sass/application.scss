@@ -1,0 +1,62 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+//
+* {
+  font-family: "arial", sans-serif !important;
+}
+.govuk-width-container, .uc-width-container, .dwp-key-details-bar__key-details {
+    max-width: 1100px;
+}
+
+.govuk-main-wrapper--auto-spacing:first-child, .govuk-main-wrapper--l {
+    padding-top: 0;
+}
+
+// Add extra styles here
+@media(min-width: 1160px) {
+    .govuk-width-container--wide {
+        margin-right:auto;
+        margin-left: auto
+    }
+
+    @supports(margin: max(calc(0px))) {
+        .govuk-width-container--wide {
+            margin-right:auto;
+            margin-left: auto
+        }
+    }
+}
+
+.workflow-nino>span {
+    padding: .1em;
+}
+
+
+.dwp-timeline.pinned {
+
+  .dwp-timeline__items {
+    border-left: none;
+  }
+  .dwp-timeline__item::before, .dwp-timeline__item:last-of-type::after {
+    border: none
+  }
+  .dwp-timeline__item {
+    padding: 0;
+    margin: 15px 0 30px 0;
+    &:last-child {
+      margin-bottom: -10px;
+    }
+  }
+  p.link {
+    margin-bottom: 0;
+  }
+}
+
+
+.js-enabled {
+  .govuk-radios__item:has(> [data-hidden="true"]),
+  .govuk-form-group:has(> [data-hidden="true"]) {
+    display: none;
+  }
+}

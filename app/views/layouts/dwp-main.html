@@ -1,0 +1,48 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+{% from "../../../node_modules/@dwp/dwp-frontend/components/internal-service-header/macro.njk" import dwpHeader %}
+
+
+
+{% block header %}
+{{ dwpHeader({ serviceName:  serviceName , serviceHref: "/", container: true }) }}
+{% endblock %}
+
+
+{% block main %}
+
+{%- if keyDetailsBar -%}
+{%- include "./components/key-details-bar" -%}
+{%- endif -%}
+<div  class="govuk-width-container govuk-width-container--wide">
+<main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main"{% if mainLang %} lang="{{ mainLang }}"{% endif %}>
+  <div class="govuk-phase-banner" role="complementary" aria-label="Feedback banner">
+    <p class="govuk-phase-banner__content">
+      <strong class="govuk-tag govuk-phase-banner__content__tag">
+        Feedback
+      </strong>
+      <span class="govuk-phase-banner__text">
+        This is a new service. Help us to improve it by giving your <a class="govuk-link" href="https://forms.office.com/Pages/ResponsePage.aspx?id=6fbxllcQF0GsKIDN_ob4wwsNITBybwlJpxgi6kbrawdURDNGOTBYT1ZYSzVWM1c3QjRRSEVLV0hMTyQlQCN0PWcu" target="_blank">feedback (opens in a new tab)</a>.
+      </span>
+    </p>
+  </div>
+
+<div role="navigation" style="margin-bottom: 40px;">
+   {{ govukBackLink({
+     text: "Back",
+     href: prevURL
+   }) }}
+ </div>
+
+
+ {% block content %}{% endblock %}
+ </div>
+ </main>
+{% endblock %}
+
+{% block footer %}
+  {{ dwpFooter({
+    meta: {
+      items: []
+    }
+}) }}
+{% endblock %}

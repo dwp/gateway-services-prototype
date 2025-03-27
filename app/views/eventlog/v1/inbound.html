@@ -1,0 +1,243 @@
+{% extends "layouts/dwp-main.html" %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="#" method="post" autocomplete="off" novalidate="">
+
+            <h1 class="govuk-heading-l">Inbound contact</h1>
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Who contacted us about the claim?
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whoContacted" name="whoContacted" type="radio" value="CLAIMANT" {% if data.whoContacted == 'CLAIMANT' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whoContacted">
+                                The claimant
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input
+                                class="govuk-radios__input"
+                                id="whoContacted-2"
+                                name="whoContacted"
+                                type="radio"
+                                value="OTHER"
+                                aria-describedby="whoContacted-2-item-hint"
+                                aria-controls="conditional-whoContacted-2"
+                                aria-expanded="false"
+                                {%  if data.whoContacted == 'OTHER' %}checked{% endif %}
+                            />
+                            <label class="govuk-label govuk-radios__label" for="whoContacted-2">
+                                Another person or organisation
+                            </label>
+
+                            <div id="whoContacted-2-item-hint" class="govuk-hint govuk-radios__hint">
+                                For example, the claimant’s representative or GP
+                            </div>
+                        </div>
+
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-whoContacted-2">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="whoContactedOther">
+                                    Add details of the person or organisation who contacted us
+                                </label>
+
+                                <input
+                                  class="govuk-input govuk-!-width-full-width"
+                                  id="whoContactedOther"
+                                  name="whoContactedOther"
+                                  type="text"
+                                  spellcheck="false"
+                                  autocomplete="off"
+                                  value="{{data.whoContactedOther}}"
+                                   />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Why did they contact us?
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whyContacted" name="whyContacted" type="radio" value="RETURNED_QUESTIONNAIRE" {%  if data.whyContacted == 'RETURNED_QUESTIONNAIRE' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whyContacted">
+                                Returned questionnaire
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whyContacted-2" name="whyContacted" type="radio" value="RESCHEDULED_AN_ASSESSMENT" {%  if data.whyContacted == 'RESCHEDULED_AN_ASSESSMENT' %}checked{% endif %}  />
+                            <label class="govuk-label govuk-radios__label" for="whyContacted-2">
+                                Rescheduled an assessment
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whyContacted-3" name="whyContacted" type="radio" value="PROGRESS_CHASING"  {%  if data.whyContacted == 'PROGRESS_CHASING' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whyContacted-3">
+                                Progress chasing
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whyContacted-4" name="whyContacted" type="radio" value="WITHDREW_THEIR_CLAIM" {%  if data.whyContacted == 'WITHDREW_THEIR_CLAIM' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whyContacted-4">
+                                Withdrew their claim
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whyContacted-5" name="whyContacted" type="radio" value="OTHER" aria-controls="conditional-whyContacted-5" aria-expanded="false" {%  if data.whyContacted == 'OTHER' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whyContacted-5">
+                                Something else
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-whyContacted-5">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="whyContactedOther">
+                                    Give a brief description
+                                </label>
+
+                                <input class="govuk-input govuk-!-width-one-half" id="whyContactedOther" name="whyContactedOther" type="text" spellcheck="false" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <h2 class="govuk-heading-m">Further information</h2>
+
+
+            {{ govukCharacterCount({
+              label: {
+                text: "Add brief details of any additional information (optional)"
+              },
+              id: 'furtherInfo',
+              name: 'furtherInfo',
+              value: data.furtherInfo,
+              attributes: {
+                autocomplete: 'off'
+              },
+              maxlength: 250,
+              rows: '4'
+            }) }}
+
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        How did they contact us?
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios" >
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="howContacted" name="howContacted" type="radio" value="PHONE" {%  if data.howContacted == 'PHONE' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="howContacted">
+                                Telephone call
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="howContacted-2" name="howContacted" type="radio" value="EMAIL"  {%  if data.howContacted == 'EMAIL' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="howContacted-2">
+                                Email
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="howContacted-3" name="howContacted" type="radio" value="SMS"  {%  if data.howContacted == 'SMS' %}checked{% endif %}  />
+                            <label class="govuk-label govuk-radios__label" for="howContacted-3">
+                                Text message (SMS)
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="howContacted-4" name="howContacted" type="radio" value="POST"  {%  if data.howContacted == 'POST' %}checked{% endif %}  />
+                            <label class="govuk-label govuk-radios__label" for="howContacted-4">
+                                Post
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" data-hidden="true">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Was the claimant’s identity verified?
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="wasIdentityVerified" name="wasIdentityVerified" type="radio" value="YES" {%  if data.wasIdentityVerified == 'YES' %}checked{% endif %}  />
+                            <label class="govuk-label govuk-radios__label" for="wasIdentityVerified">
+                                Yes, their identity was verified
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="wasIdentityVerified-2" name="wasIdentityVerified" type="radio" value="NO" {%  if data.wasIdentityVerified == 'NO' %}checked{% endif %}  />
+                            <label class="govuk-label govuk-radios__label" for="wasIdentityVerified-2">
+                                No, their identity was not verified
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="govuk-button-group">
+                <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" id="continue-button" data-govuk-button-init="">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+  <script>
+  (function () {
+    const howContacted = document.querySelectorAll('input[name="howContacted"]');
+    const wasIdentityVerified = document.querySelector("[data-hidden]");
+
+    if (howContacted.length) {
+      if (
+        document.querySelector('input[name="howContacted"]:checked')?.value ===
+        "PHONE"
+      ) {
+        wasIdentityVerified.setAttribute("data-hidden", "false");
+      }
+
+      howContacted.forEach((elem) => {
+        elem.addEventListener("change", function () {
+          const selected = Array.from(
+            document.querySelectorAll('input[name="howContacted"]:checked'),
+          ).map((checkbox) => checkbox.value);
+          if (selected.includes("PHONE")) {
+            wasIdentityVerified.setAttribute("data-hidden", "false");
+          } else {
+            wasIdentityVerified.setAttribute("data-hidden", "true");
+          }
+        });
+      });
+    }
+  })();
+</script>
+{% endblock %}

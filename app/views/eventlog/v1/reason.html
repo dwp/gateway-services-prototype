@@ -1,0 +1,109 @@
+{% extends "layouts/dwp-main.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="#" method="post" autocomplete="off" novalidate="">
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <h1 class="govuk-fieldset__heading">
+                  What are you adding to the timeline?
+                </h1>
+              </legend>
+
+            <div class="govuk-radios" data-module="govuk-radios" data-govuk-radios-init="">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="whatAreYouAdding" name="whatAreYouAdding" type="radio" value="INBOUND" {% if data.whatAreYouAdding === 'INBOUND' %}checked{% endif %} >
+                <label class="govuk-label govuk-radios__label" for="whatAreYouAdding">
+                  Inbound contact
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="whatAreYouAdding-2" name="whatAreYouAdding" type="radio" value="OUTBOUND" {% if data.whatAreYouAdding === 'OUTBOUND' %}checked{% endif %}>
+                <label class="govuk-label govuk-radios__label" for="whatAreYouAdding-2">
+                  Outbound contact
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="whatAreYouAdding-3" name="whatAreYouAdding" type="radio" value="UPDATE" {% if data.whatAreYouAdding === 'UPDATE' %}checked{% endif %}>
+                <label class="govuk-label govuk-radios__label" for="whatAreYouAdding-3">
+                  Update made to a claim
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="whatAreYouAddingDate-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              When did this happen?
+            </legend>
+            <div id="whatAreYouAddingDate-hint" class="govuk-hint">
+              For example, 15 3 2022
+            </div>
+            <div class="govuk-date-input" id="whatAreYouAddingDate">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="whatAreYouAddingDate-day">
+                    Day
+                  </label>
+                  <input
+                  class="govuk-input govuk-date-input__input govuk-input--width-2"
+                  id="whatAreYouAddingDate-day"
+                  name="whatAreYouAddingDate-day"
+                  type="text"
+                  value={{ formData['whatAreYouAddingDate-day'] or todaysDate.day }}
+                  autocomplete="off" inputmode="numeric">
+                </div>
+              </div>
+
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="whatAreYouAddingDate-month">
+                    Month
+                  </label>
+                  <input
+                  class="govuk-input govuk-date-input__input govuk-input--width-2"
+                  id="whatAreYouAddingDate-month"
+                  name="whatAreYouAddingDate-month" type="text"
+                  value={{ formData['whatAreYouAddingDate-month'] or todaysDate.month }}
+                  autocomplete="off" inputmode="numeric">
+                </div>
+              </div>
+
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="whatAreYouAddingDate-year">
+                    Year
+                  </label>
+                  <input
+                  class="govuk-input govuk-date-input__input govuk-input--width-4"
+                  id="whatAreYouAddingDate-year" name="whatAreYouAddingDate-year" type="text"
+                  value={{ formData['whatAreYouAddingDate-year'] or todaysDate.year }}
+                  autocomplete="off" inputmode="numeric">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="whatAreYouAddingTime">
+            Time of contact (optional)
+          </label>
+          <div id="whatAreYouAddingTime-hint" class="govuk-hint">
+            For example, 12:30pm
+          </div>
+          <input class="govuk-input govuk-!-width-one-quarter" id="whatAreYouAddingTime" name="whatAreYouAddingTime" type="text" aria-describedby="whatAreYouAddingTime-hint" autocomplete="off">
+        </div>
+          <div class="govuk-button-group">
+            <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" id="continue-button" data-govuk-button-init="">
+              Continue
+            </button>
+          </div>
+        </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+<p class="dwp-timeline__datetime" id="event-date-{{index}}">
+    {{entry.action.action_date | formatDate() }} {%- if entry.action.action_time_freetext %} {{ 'at' }} {{entry.action.action_time_freetext}} {% endif %}
+</p>
+<h2 class="dwp-timeline__heading"  id="event-header-{{index}}">
+    <span class="govuk-visually-hidden">Event {{index}}: </span>{{entry.benefit_type}} {{entry.action.action_type.text }}
+</h2>
+<p class="dwp-timeline__by-line"  id="event-by-{{index}}">
+    {{ 'by' if entry.action.contact_type.code === "UPDATE" else 'by' }} {{entry.action.action_user.first_name}} {{entry.action.action_user.last_name}}
+</p>
+{% if entry.action.action_description or entry.action.action_contact.text%}
+<p class="dwp-timeline__content"  id="event-description-additional-{{index}}">
+    {{ entry.action.action_description | striptags(true) | escape | nl2br }}
+
+    {% if entry.action.action_description and entry.action.action_contact.text %} – {% endif %}
+
+    {% if entry.action.contact_type.code !== "UPDATE" %}
+        <span id="event-description-{{index}}">
+            {% if entry.action.channel.length > 0 %}
+                {% for channel in entry.action.channel  %}
+                    {%- if loop.index > 1 and not loop.last %}, {% endif %}
+                    {%- if loop.last and loop.index !== 1 %} {{ 'and' }} {% endif %}
+                    {{ channel.text if loop.first else channel.text | lower -}}
+                {% endfor %}
+            {% endif %}
+
+            {% if entry.action.contact_type.code === "INBOUND"  %}
+                {{ 'from' }}
+            {% elif entry.action.contact_type.code === "OUTBOUND" %}
+                {{ 'to' }}
+            {% endif  %}
+
+            {% if entry.action.action_contact.code === "CLAIMANT" %}
+                {{ entry.action.action_contact.text | lower }}
+            {% else %}
+                {{ entry.action.action_contact.text }}
+            {% endif  %}
+
+            {% if entry.identifiers %}
+                {% for identifier in entry.identifiers %}
+                    {% if identifier.id_type === "identity_verified" %}
+                        {% if identifier.id_value === "YES"   %}
+                             – {{ 'Claimant identity verified' }}
+                         {% elif identifier.id_value === "NO" %}
+                             – {{ 'Claimant identity not verified' }}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </span>
+
+        {% if isPinnedItems %}
+            <p class="link"><a href="?unpin={{entry.event_id}}">Unpin entry</a></p>
+        {% else %}
+          {% if pinnedItems.length < 3 %}
+            {% if entry.pinned === true %}
+              <p><a href="?unpin={{entry.event_id}}">Unpin entry</a></p>
+            {% else %}
+              <p><a href="?pin={{entry.event_id}}">Pin entry</a></p>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+
+
+    {% endif %}
+
+{% endif %}

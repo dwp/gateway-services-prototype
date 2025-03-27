@@ -1,0 +1,104 @@
+{% extends "layouts/dwp-main.html" %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="#" method="post" autocomplete="off" novalidate="">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <h1 class="govuk-fieldset__heading">
+                            What has been updated?
+                        </h1>
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whatHasBeenUpdated" name="whatHasBeenUpdated" type="radio" value="EVIDENCE_REVIEWED" {% if data.whatHasBeenUpdated == 'EVIDENCE_REVIEWED' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whatHasBeenUpdated">
+                                Initial or further evidence reviewed
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whatHasBeenUpdated-2" name="whatHasBeenUpdated" type="radio" value="PAPER_BASED_REVIEW_BOOKED" {% if data.whatHasBeenUpdated == 'PAPER_BASED_REVIEW_BOOKED' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whatHasBeenUpdated-2">
+                                Paper based review booked
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whatHasBeenUpdated-3" name="whatHasBeenUpdated" type="radio" value="FAILED_TO_ATTEND_ASSESSMENT" {% if data.whatHasBeenUpdated == 'FAILED_TO_ATTEND_ASSESSMENT' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whatHasBeenUpdated-3">
+                                Failed to attend assessment
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whatHasBeenUpdated-4" name="whatHasBeenUpdated" type="radio" value="ASSESSMENT_ABANDONED" {% if data.whatHasBeenUpdated == 'ASSESSMENT_ABANDONED' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whatHasBeenUpdated-4">
+                                Assessment abandoned
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whatHasBeenUpdated-5" name="whatHasBeenUpdated" type="radio" value="REPORT_AUDITED" {% if data.whatHasBeenUpdated == 'REPORT_AUDITED' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whatHasBeenUpdated-5">
+                                Report audited
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whatHasBeenUpdated-6" name="whatHasBeenUpdated" type="radio" value="FILE_RETURNED_TO_BAU" {% if data.whatHasBeenUpdated == 'FILE_RETURNED_TO_BAU' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whatHasBeenUpdated-6">
+                                File returned to BAU
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="whatHasBeenUpdated-7" name="whatHasBeenUpdated" type="radio" value="OTHER" aria-controls="conditional-whatHasBeenUpdated-7" aria-expanded="false" {% if data.whatHasBeenUpdated == 'OTHER' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="whatHasBeenUpdated-7">
+                                Something else
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-whatHasBeenUpdated-7">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="whatHasBeenUpdatedOther">
+                                    Give a brief description
+                                </label>
+
+                                <input class="govuk-input govuk-!-width-one-half" id="whatHasBeenUpdatedOther" name="whatHasBeenUpdatedOther" type="text" autocomplete="off" value="{{data.whatHasBeenUpdatedOther}}" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <h2 class="govuk-heading-m">Further information</h2>
+
+            {{ govukCharacterCount({
+              label: {
+                text: "Add brief details of any additional information (optional)"
+              },
+              id: 'furtherInfo',
+              name: 'furtherInfo',
+              value: data.furtherInfo,
+              attributes: {
+                autocomplete: 'off'
+              },
+              maxlength: 250,
+              rows: '4'
+            }) }}
+
+            <div class="govuk-button-group">
+                <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" id="continue-button" data-govuk-button-init="">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
