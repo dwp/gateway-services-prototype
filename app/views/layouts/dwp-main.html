@@ -26,15 +26,13 @@
     </p>
   </div>
 
-{%- if hideBacklink -%}
-{% else %}
 <div role="navigation" style="margin-bottom: 40px;">
    {{ govukBackLink({
      text: "Back",
      href: prevURL
    }) }}
  </div>
-{% endif %}
+
 
  {% block content %}{% endblock %}
  </div>

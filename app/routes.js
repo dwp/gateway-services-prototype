@@ -2,9 +2,8 @@
 // For guidance on how to create routes see:
 // https://prototype-kit.service.gov.uk/docs/create-routes
 //
-const { timelineData } = require("./views/eventlog/v1/data");
+const { timelineData }  = require("./views/eventlog/v1/data");
 const { en } = require("./views/eventlog/v1/lang");
-const { lang } = require("./views/referral/v1/create/lang");
 
 const govukPrototypeKit = require("govuk-prototype-kit");
 const router = govukPrototypeKit.requests.setupRouter();
@@ -14,7 +13,7 @@ const findAddressPlugin = require("find-an-address-plugin");
 
 findAddressPlugin(router);
 
-const todaysDate = new Date();
+ const todaysDate = new Date();
 
 // Logging session data
 // This code shows in the terminal what session data has been saved.
@@ -26,13 +25,12 @@ router.use((req, res, next) => {
   };
   console.log(JSON.stringify(log, null, 2));
   res.locals.en = en;
-  res.locals.lang = lang;
-  (res.locals.todaysDate = {
-    day: todaysDate.getDate(),
-    month: todaysDate.getMonth() + 1,
-    year: todaysDate.getFullYear(),
-  }),
-    next();
+  res.locals.todaysDate = {
+       day: todaysDate.getDate(),
+       month: todaysDate.getMonth() + 1,
+       year: todaysDate.getFullYear(),
+     },
+  next();
 });
 
 // This code shows in the terminal what page you are on and what the previous page was.
@@ -64,20 +62,20 @@ router.use("/eventlog/v1/timeline", (req, res, next) => {
   const pinned = req.query.pin;
   const unpinned = req.query.unpin;
 
-  if (pinned) {
-    timelineData.find((x) => x.event_id === Number(pinned)).pinned = true;
+  if(pinned){
+    timelineData.find(x => x.event_id === Number(pinned)).pinned = true;
   }
 
-  if (unpinned) {
-    timelineData.find((x) => x.event_id === Number(unpinned)).pinned = false;
+  if(unpinned){
+    timelineData.find(x => x.event_id === Number(unpinned)).pinned = false;
   }
 
-  const pinnedItems = timelineData.filter((x) => x.pinned === true);
+  const pinnedItems = timelineData.filter(x => x.pinned === true)
 
   res.locals.keyDetailsBar = true;
   res.locals.timeline = timelineData;
   res.locals.pinnedItems = pinnedItems;
-  res.locals.entry = req.query.entry;
+  res.locals.entry = req.query.entry
   next();
 });
 
@@ -98,172 +96,53 @@ router.post("/eventlog/v1/inbound", function (req, res) {
 
 router.post("/eventlog/v1/outbound", function (req, res) {
   res.redirect("/eventlog/v1/check-answers");
-});
+})
 
 router.post("/eventlog/v1/what-updated", function (req, res) {
   res.redirect("/eventlog/v1/check-answers");
 });
 
 router.post("/eventlog/v1/check-answers", function (req, res) {
-  const date = `${req.session.data["whatAreYouAddingDate-year"]}-${req.session.data["whatAreYouAddingDate-month"]}-${req.session.data["whatAreYouAddingDate-day"]}`;
+
+  const date = `${req.session.data["whatAreYouAddingDate-year"]}-${req.session.data["whatAreYouAddingDate-month"]}-${req.session.data["whatAreYouAddingDate-day"]}`
 
   timelineData.unshift({
-    benefit_type: "ESA",
-    source_system: "HAS",
-    identifiers: [
-      { id_type: "referral_id", id_value: "pip-123123" },
-      {
-        id_type: "citizen_guid",
-        id_value: "88776655-1234-4321-9876-665544332211",
-      },
-    ],
-    created_timestamp: "2022-02-22T17:30:00.000Z",
-    created_by: {
-      first_name: "Jane",
-      last_name: "Doe",
-      email: "jane.doe@dwp.gov.uk",
-    },
-    event_id: timelineData.length,
-    action: {
-      channel: [{ code: "PHONE", text: "Telephone call" }],
-      contact_type: {
-        code: req.session.data["whatAreYouAdding"],
-        text: en.whatAreYouAdding[req.session.data["whatAreYouAdding"]],
-      },
-      action_type: { code: "", text: "Paper based review booked" },
-      action_date: date,
-      action_time_freetext: req.session.data["whatAreYouAddingTime"],
-      action_user: {
-        first_name: "Angela",
-        last_name: "Tait",
-        email: "jane.tait@dwp.gov.uk",
-      },
-      action_description: "A new entry here",
-      action_contact: {
-        code: req.session.data["whoContacted"],
-        text: en.whoContacted[req.session.data["whoContacted"]],
-      },
-    },
-    pinned: false,
-  });
+     benefit_type: 'ESA',
+     source_system: 'HAS',
+     identifiers: [
+       { id_type: 'referral_id', id_value: 'pip-123123' },
+       {
+         id_type: 'citizen_guid',
+         id_value: '88776655-1234-4321-9876-665544332211'
+       }
+     ],
+     created_timestamp: '2022-02-22T17:30:00.000Z',
+     created_by: {
+       first_name: 'Jane',
+       last_name: 'Doe',
+       email: 'jane.doe@dwp.gov.uk'
+     },
+     event_id: timelineData.length,
+     action: {
+       channel: [
+         { code: 'PHONE', text: 'Telephone call' }
+      ],
+       contact_type: { code: req.session.data["whatAreYouAdding"], text: en.whatAreYouAdding[req.session.data["whatAreYouAdding"]] },
+       action_type: { code: '', text: 'Paper based review booked' },
+       action_date: date,
+       action_time_freetext: req.session.data["whatAreYouAddingTime"],
+       action_user: {
+         first_name: 'Angela',
+         last_name: 'Tait',
+         email: 'jane.tait@dwp.gov.uk'
+       },
+       action_description: 'A new entry here',
+       action_contact: { code: req.session.data["whoContacted"], text: en.whoContacted[req.session.data["whoContacted"]] }
+     },
+     pinned: false
+   })
 
   res.locals.timeline = timelineData;
+console.log(res.locals.timeline)
   res.redirect("/eventlog/v1/timeline?entry=true");
-});
-
-//create a referral v1
-
-router.post("/referral/v1/create/claimant-details", function (req, res) {
-  res.redirect("/referral/v1/create/contact-details");
-});
-
-router.post("/referral/v1/create/contact-details", function (req, res) {
-  res.redirect("/referral/v1/create/benefit-type");
-});
-
-router.post("/referral/v1/create/benefit-type", function (req, res) {
-  res.redirect("/referral/v1/create/referral-type");
-});
-
-router.post("/referral/v1/create/referral-type", function (req, res) {
-  res.redirect("/referral/v1/create/additional-details");
-});
-
-router.post("/referral/v1/create/additional-details", function (req, res) {
-  res.redirect("/referral/v1/create/check-answers");
-});
-
-router.post("/referral/v1/create/confirmation", function (req, res) {
-  req.session.data = {};
-  res.redirect("/referral/v1/create/confirmation");
-});
-
-//update
-router.use("/referral/v1/update/update-referral-details", (req, res, next) => {
-  res.locals.keyDetailsBar = true;
-  next();
-});
-
-router.use("/referral/v1/update/update-claimant-details", (req, res, next) => {
-  res.locals.keyDetailsBar = true;
-  next();
-});
-
-router.post("/referral/v1/update/claimant-details", function (req, res) {
-  res.redirect("/referral/v1/update/update-claimant-details");
-});
-
-//create a referral v2
-
-router.post("/referral/v2/create/claimant-details", function (req, res) {
-  res.redirect("/referral/v2/create/referral-details");
-});
-
-router.post("/referral/v2/create/referral-details", function (req, res) {
-  res.redirect("/referral/v2/create/check-answers");
-});
-
-router.post("/referral/v2/create/confirmation", function (req, res) {
-  req.session.data = {};
-  res.redirect("/referral/v2/create/confirmation");
-});
-
-router.use("/referral/v2/create/confirmation", (req, res, next) => {
-  res.locals.hideBacklink = true;
-  next();
-});
-
-//update v2
-router.post("/referral/v2/update/claimant-details", function (req, res) {
-  res.redirect("/referral/v2/update/referral-details");
-});
-
-router.post("/referral/v2/update/referral-details", function (req, res) {
-  res.redirect("/referral/v2/update/check-answers");
-});
-
-router.post("/referral/v2/update/confirmation", function (req, res) {
-  req.session.data = {};
-  res.redirect("/referral/v2/update/confirmation");
-});
-
-router.use("/referral/v2/update/confirmation", (req, res, next) => {
-  res.locals.hideBacklink = true;
-  next();
-});
-
-router.use("/referral/v2/update/check-answers", (req, res, next) => {
-if (req.query.missing === "claimant-details") {
-  req.session.data = {
-    "firstName": "",
-    "middleNames": "",
-    "lastName": "Bloggs",
-    "requestedName": "",
-    "postcode": "",
-    "dob-Day": "1",
-    "dob-Month": "1",
-    "dob-Year": "1999",
-    "nino": "PA100000A",
-    "mobilePhone": "00000000000",
-    "additionalPhone": "",
-    "benefitType": "ESA",
-    "referralSystemReferralId": "",
-    "claimReferenceNumber": "",
-    "referralType": "NEW_REFERRAL",
-    "ucbInd": "NOT_KNOWN",
-    "mentalHealthInd": "NOT_KNOWN",
-    "referralDate-Day": "1",
-    "referralDate-Month": "1",
-    "referralDate-Year": "2005",
-    "fmeConsentGiven": "YES",
-    "isSrti": "YES",
-    "requiresAdditionalSupport": "YES",
-    "missing": "claimant-details"
-  }
-  res.locals.data = req.session.data
-}
-
-  next();
-
-
 });

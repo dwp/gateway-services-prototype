@@ -60,31 +60,3 @@
     display: none;
   }
 }
-.govuk-summary-list__value.missing {
-  font-weight: bold;
-  color: #d4351c;
-}
-
-
-.dwp-side-navigation__item.nav-error {
-
-  .dwp-side-navigation__link {
-      color: #d4351c;
-  }
-}
-
-a.red:link,
-a.red:visited {
-  color: #d4351c;
-}
-
-.govuk-summary-list__key.error {
-  margin: 10px 0px 5px 0px;
-    padding: 5px 0 5px 10px;
-    border-left: 4px solid #d4351c;
-}
-
-.govuk-input,
-.govuk-radios__input {
-    scroll-margin-top: 80px;
-}
