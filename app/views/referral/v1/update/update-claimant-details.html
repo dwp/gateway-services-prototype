@@ -1,0 +1,178 @@
+{% extends "layouts/dwp-main.html" %}
+
+{% set prevURL = "/" %}
+
+{% block content %}
+<div class="govuk-width-container">
+    <div class="govuk-grid-row govuk-main-wrapper govuk-main-wrapper--auto-spacing">
+        <div class="govuk-grid-column-one-quarter">
+            <nav class="dwp-side-navigation" aria-label="Side" role="navigation">
+                <ul class="dwp-side-navigation__list">
+                    <li class="dwp-side-navigation__item dwp-side-navigation__item--selected">
+                        <a id="referral-overview" href="./update-claimant-details" aria-current="true" class="dwp-side-navigation__link dwp-side-navigation__link--selected">
+
+                              Claimant details
+                        </a>
+                    </li>
+
+                    <li class="dwp-side-navigation__item">
+                        <a id="claimant-details" href="./update-referral-details" class="dwp-side-navigation__link">
+
+                          Referral details
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="govuk-grid-column-one-half">
+            <main id="main-content">
+                <h1 id="referral-details" class="govuk-heading-m">Claimant details</h1>
+
+                <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row" id="personal-details">
+                  <dt class="govuk-summary-list__key">
+                      First name
+                  </dt>
+                  <dd class="govuk-summary-list__value {% if not data.firstName %}missing{% endif %}">
+                    {% if data.firstName %}{{ data.firstName }}{% else %}Missing first name{% endif %}
+                  </dd>
+
+                  <dd class="govuk-summary-list__actions">
+                      <a class="govuk-link" href="./claimant-details#first_name">
+                        {% if data.firstName %}Change{% else %}Add{% endif %}
+                      </a>
+                  </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                      Middle names
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+
+                  </dd>
+
+                  <dd class="govuk-summary-list__actions">
+                      <a class="govuk-link" href="#">
+                        Add
+                      </a>
+                  </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                      Last name
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                        Bloggs
+                  </dd>
+
+                  <dd class="govuk-summary-list__actions">
+                      <a class="govuk-link" href="#">
+                        Change
+                      </a>
+                  </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                      Preferred name
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+
+                  </dd>
+
+                  <dd class="govuk-summary-list__actions">
+                      <a class="govuk-link" href="#">
+                        Add
+                      </a>
+                  </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                      Postcode
+                  </dt>
+                  <dd class="govuk-summary-list__value {% if not data.postcode %}missing{% endif %}">
+                      {% if data.postcode %}{{ data.postcode }}{% else %}Missing postcode{% endif %}
+                  </dd>
+
+                  <dd class="govuk-summary-list__actions">
+                      <a class="govuk-link" href="./claimant-details#postcode">
+                        {% if data.postcode %}Change{% else %}Add{% endif %}
+                      </a>
+                  </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                      Date of birth
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                        1 January 1999
+                  </dd>
+
+                  <dd class="govuk-summary-list__actions">
+                      <a class="govuk-link" href="#">
+                        Change
+                      </a>
+                  </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                      National insurance number
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                        PA100000A
+                  </dd>
+
+                  <dd class="govuk-summary-list__actions">
+                      <a class="govuk-link" href="#">
+                        Change
+                      </a>
+                  </dd>
+              </div>
+
+              <div class="govuk-summary-list__row" id="contact-details">
+                  <dt class="govuk-summary-list__key">
+                      Mobile phone number
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                        07666666565
+                  </dd>
+
+                  <dd class="govuk-summary-list__actions">
+                      <a class="govuk-link" href="#">
+                        Change
+                      </a>
+                  </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                      Additional phone number
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+
+                  </dd>
+
+                  <dd class="govuk-summary-list__actions">
+                      <a class="govuk-link" href="#">
+                        Change
+                      </a>
+                  </dd>
+              </div>
+
+
+
+          </dl>
+            </main>
+        </div>
+        <div class="govuk-grid-column-one-quarter">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

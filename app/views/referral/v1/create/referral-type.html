@@ -1,0 +1,155 @@
+{% extends "layouts/dwp-main.html" %}
+
+{% set prevURL = "./benefit-type" %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Create a referral</h1>
+
+
+
+        <form method="post" action="#">
+
+
+          <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                      Referral type
+                  </legend>
+
+                  <div class="govuk-radios" data-module="govuk-radios" data-govuk-radios-init="">
+
+{% if data['benefitType'] == 'PIP' %}
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type" name="referralType" type="radio" {% if data.referralType === 'NEW_REFERRAL_ADVANCE_CLAIM' %}checked{% endif %} value="NEW_REFERRAL_ADVANCE_CLAIM"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type">
+                              Advance claim referral
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-2" name="referralType" type="radio" {% if data.referralType === 'ADVICE' %}checked{% endif %} value="ADVICE"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-2">
+                              Advice
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-3" name="referralType" type="radio" {% if data.referralType === 'NEW_REFERRAL_APPEAL' %}checked{% endif %} value="NEW_REFERRAL_APPEAL"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-3">
+                              Appeal
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-4" name="referralType" type="radio" {% if data.referralType === 'NEW_REFERRAL_AWARD_REVIEW' %}checked{% endif %} value="NEW_REFERRAL_AWARD_REVIEW"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-4">
+                              Award review
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-5" name="referralType" type="radio" {% if data.referralType === 'NEW_REFERRAL_COC_REVIEW' %}checked{% endif %} value="NEW_REFERRAL_COC_REVIEW"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-5">
+                              CoC review
+                          </label>
+                      </div>
+{% endif %}
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-6" name="referralType" type="radio" {% if data.referralType === 'NEW_REFERRAL' %}checked{% endif %} value="NEW_REFERRAL" />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-6">
+                              New referral
+                          </label>
+                      </div>
+{% if data['benefitType'] == 'PIP' %}
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-7" name="referralType" type="radio" {% if data.referralType === 'NEW_REFERRAL_REASSESSMENT' %}checked{% endif %} value="NEW_REFERRAL_REASSESSMENT"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-7">
+                              New referral reassessment
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-8" name="referralType" type="radio" {% if data.referralType === 'NEW_REFERRAL_RECONSIDERATION' %}checked{% endif %} value="NEW_REFERRAL_RECONSIDERATION"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-8">
+                              Reconsideration
+                          </label>
+                      </div>
+{% endif %}
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-9" name="referralType" type="radio" {% if data.referralType === 'RE_REFERRAL' %}checked{% endif %} value="RE_REFERRAL" />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-9">
+                              Re-referral
+                          </label>
+                      </div>
+{% if data['benefitType'] == 'PIP' %}
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-10" name="referralType" type="radio" {% if data.referralType === 'RE_REFERRAL_ADVANCE_CLAIM' %}checked{% endif %} value="RE_REFERRAL_ADVANCE_CLAIM"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-10">
+                              Re-referral advance claim
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-11" name="referralType" type="radio" {% if data.referralType === 'RE_REFERRAL_APPEAL' %}checked{% endif %} value="RE_REFERRAL_APPEAL"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-11">
+                              Re-referral appeal
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-12" name="referralType" type="radio" {% if data.referralType === 'RE_REFERRAL_AWARD_REVIEW' %}checked{% endif %} value="RE_REFERRAL_AWARD_REVIEW"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-12">
+                              Re-referral award review
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-13" name="referralType" type="radio" {% if data.referralType === 'RE_REFERRAL_COC_REVIEW' %}checked{% endif %} value="RE_REFERRAL_COC_REVIEW"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-13">
+                              Re-referral CoC review
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-14" name="referralType" type="radio" {% if data.referralType === 'RE_REFERRAL_REASSESSMENT' %}checked{% endif %} value="RE_REFERRAL_REASSESSMENT"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-14">
+                              Re-referral reassessment
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-15" name="referralType" type="radio" {% if data.referralType === 'RE_REFERRAL_RECONSIDERATION' %}checked{% endif %} value="RE_REFERRAL_RECONSIDERATION"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-15">
+                              Re-referral reconsideration
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-16" name="referralType" type="radio" {% if data.referralType === 'REWORK' %}checked{% endif %} value="REWORK"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-16">
+                              Rework
+                          </label>
+                      </div>
+
+                      <div class="govuk-radios__item">
+                          <input class="govuk-radios__input" id="referral_type-17" name="referralType" type="radio" {% if data.referralType === 'REWORK_INDEPENDENT_AUDIT' %}checked{% endif %} value="REWORK_INDEPENDENT_AUDIT"  />
+                          <label class="govuk-label govuk-radios__label" for="referral_type-17">
+                              Rework independent audit
+                          </label>
+                      </div>
+{% endif %}
+                  </div>
+              </fieldset>
+          </div>
+
+            <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" data-govuk-button-init="">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

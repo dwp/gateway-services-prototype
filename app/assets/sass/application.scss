@@ -60,3 +60,7 @@
     display: none;
   }
 }
+.govuk-summary-list__value.missing {
+  font-weight: bold;
+  color: #d4351c;
+}

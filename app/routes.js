@@ -4,6 +4,7 @@
 //
 const { timelineData }  = require("./views/eventlog/v1/data");
 const { en } = require("./views/eventlog/v1/lang");
+const { lang } = require("./views/referral/v1/create/lang");
 
 const govukPrototypeKit = require("govuk-prototype-kit");
 const router = govukPrototypeKit.requests.setupRouter();
@@ -25,6 +26,7 @@ router.use((req, res, next) => {
   };
   console.log(JSON.stringify(log, null, 2));
   res.locals.en = en;
+  res.locals.lang = lang;
   res.locals.todaysDate = {
        day: todaysDate.getDate(),
        month: todaysDate.getMonth() + 1,
@@ -143,6 +145,48 @@ router.post("/eventlog/v1/check-answers", function (req, res) {
    })
 
   res.locals.timeline = timelineData;
-console.log(res.locals.timeline)
   res.redirect("/eventlog/v1/timeline?entry=true");
+});
+
+//create a referral
+
+router.post("/referral/v1/create/claimant-details", function (req, res) {
+  res.redirect("/referral/v1/create/contact-details");
+});
+
+router.post("/referral/v1/create/contact-details", function (req, res) {
+  res.redirect("/referral/v1/create/benefit-type");
+});
+
+router.post("/referral/v1/create/benefit-type", function (req, res) {
+  res.redirect("/referral/v1/create/referral-type");
+});
+
+router.post("/referral/v1/create/referral-type", function (req, res) {
+  res.redirect("/referral/v1/create/additional-details");
+});
+
+router.post("/referral/v1/create/additional-details", function (req, res) {
+  res.redirect("/referral/v1/create/check-answers");
+});
+
+router.post("/referral/v1/create/confirmation", function (req, res) {
+  req.session.data = {}
+  res.redirect("/referral/v1/create/confirmation");
+});
+
+
+//update
+router.use("/referral/v1/update/update-referral-details", (req, res, next) => {
+  res.locals.keyDetailsBar = true;
+  next();
+});
+
+router.use("/referral/v1/update/update-claimant-details", (req, res, next) => {
+  res.locals.keyDetailsBar = true;
+  next();
+});
+
+router.post("/referral/v1/update/claimant-details", function (req, res) {
+  res.redirect("/referral/v1/update/update-claimant-details");
 });
