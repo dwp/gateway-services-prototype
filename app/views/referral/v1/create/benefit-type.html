@@ -1,0 +1,166 @@
+{% extends "layouts/dwp-main.html" %}
+
+{% set prevURL = "./contact-details" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Create a referral</h1>
+
+
+
+        <form method="post" action="#">
+
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Benefit type
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios" data-govuk-radios-init="">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="benefit_type" name="benefitType" type="radio" value="ESA" {% if data.benefitType === 'ESA' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="benefit_type">
+                                ESA
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="benefit_type-2" name="benefitType" type="radio" value="PIP" {% if data.benefitType === 'PIP' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="benefit_type-2">
+                                PIP
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="benefit_type-3" name="benefitType" type="radio" value="PIP_SERVICE" {% if data.benefitType === 'PIP_SERVICE' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="benefit_type-3">
+                                PIP Service
+                            </label>
+                        </div>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="benefit_type-4" name="benefitType" type="radio" value="UC" {% if data.benefitType === 'UC' %}checked{% endif %} />
+                            <label class="govuk-label govuk-radios__label" for="benefit_type-4">
+                                UC
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="referring_system_referral_id">
+                    Referral ID
+                </label>
+
+                <input class="govuk-input govuk-input--width-35" id="referring_system_referral_id" value="{{ data.referralSystemReferralId }}"  name="referralSystemReferralId" type="text" autocomplete="off" data-hidden="true" />
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="claim_reference_number">
+                    Claim reference number
+                </label>
+
+                <input class="govuk-input govuk-input--width-35" id="claim_reference_number" value="{{ data.claimReferenceNumber }}" name="claimReferenceNumber" type="text" autocomplete="off" data-benefit-type="PIP" data-hidden="true" />
+            </div>
+
+            <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" data-govuk-button-init="">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+{% block bodyEnd %}
+  {{ super() }}
+  <script>
+(function () {
+  const benefitType = document.querySelectorAll('input[name="benefitType"]');
+  const dataHiddenRadios = document.querySelectorAll(
+    '[type="radio"][data-hidden="true"]',
+  );
+  const referralId = document.querySelectorAll(
+    "#referring_system_referral_id",
+  )[0];
+  const dataBenefitTypePip = document.querySelectorAll(
+    '[data-benefit-type="PIP"]',
+  );
+  const dataBenefitTypeEsa = document.querySelectorAll(
+    '[data-benefit-type="ESA"]',
+  );
+  const referralTypeChecked = document.querySelector(
+    '[name="referralType"]:checked',
+  );
+
+  if (benefitType.length) {
+    if (
+      document.querySelector('input[name="benefitType"]:checked')?.value ===
+      "PIP"
+    ) {
+      dataHiddenRadios.forEach((e) => {
+        e.setAttribute("data-hidden", "false");
+      });
+      referralId.setAttribute("data-hidden", "true");
+      document
+        .querySelectorAll("#claim_reference_number")[0]
+        .setAttribute("data-hidden", "false");
+    } else if (
+      !document.querySelectorAll('input[name="benefitType"]:checked').length
+    ) {
+      referralId.setAttribute("data-hidden", "true");
+    } else {
+      dataHiddenRadios.forEach((e) => {
+        e.setAttribute("data-hidden", "true");
+      });
+      referralId.setAttribute("data-hidden", "false");
+    }
+
+    if (
+      document.querySelector('input[name="benefitType"]:checked')?.value ===
+      "ESA"
+    ) {
+      dataBenefitTypeEsa.forEach((e) => {
+        e.setAttribute("data-hidden", "false");
+      });
+    } else {
+      dataBenefitTypeEsa.forEach((e) => {
+        e.setAttribute("data-hidden", "true");
+      });
+    }
+
+    benefitType.forEach((elem) => {
+      elem.addEventListener("change", function (event) {
+        if (referralTypeChecked) {
+          referralTypeChecked.checked = false;
+        }
+
+        if (event.target.value === "PIP") {
+          dataBenefitTypePip.forEach((e) => {
+            e.setAttribute("data-hidden", "false");
+          });
+          referralId.setAttribute("data-hidden", "true");
+        } else {
+          dataBenefitTypePip.forEach((e) => {
+            e.setAttribute("data-hidden", "true");
+          });
+          referralId.setAttribute("data-hidden", "false");
+        }
+
+        if (event.target.value === "ESA") {
+          dataBenefitTypeEsa.forEach((e) => {
+            e.setAttribute("data-hidden", "false");
+          });
+        } else {
+          dataBenefitTypeEsa.forEach((e) => {
+            e.setAttribute("data-hidden", "true");
+          });
+        }
+      });
+    });
+  }
+})();
+  </script>
+{% endblock %}
