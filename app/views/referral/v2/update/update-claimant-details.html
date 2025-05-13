@@ -46,16 +46,16 @@
 
                 <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row" id="personal-details">
-                  <dt class="govuk-summary-list__key">
+                  <dt class="govuk-summary-list__key error">
                       First name
                   </dt>
                   <dd class="govuk-summary-list__value {% if not data.firstName %}missing{% endif %}">
-                    {% if data.firstName %}{{ data.firstName }}{% else %}Enter a first name{% endif %}
+                    {% if data.firstName %}{{ data.firstName }}{% else %}<a class="govuk-link red" href="./claimant-details#first_name">Enter a first name</a>{% endif %}
                   </dd>
 
                   <dd class="govuk-summary-list__actions">
                       <a class="govuk-link" href="./claimant-details#first_name">
-                        {% if data.firstName %}Change{% else %}Add{% endif %}
+                        {% if data.firstName %}Change{% else %}{% endif %}
                       </a>
                   </dd>
               </div>
@@ -106,16 +106,16 @@
               </div>
 
               <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
+                  <dt class="govuk-summary-list__key error">
                       Postcode
                   </dt>
                   <dd class="govuk-summary-list__value {% if not data.postcode %}missing{% endif %}">
-                      {% if data.postcode %}{{ data.postcode }}{% else %}Enter a postcode{% endif %}
+                      {% if data.postcode %}{{ data.postcode }}{% else %}<a class="govuk-link red" href="./claimant-details#postcode">Enter a postcode</a>{% endif %}
                   </dd>
 
                   <dd class="govuk-summary-list__actions">
                       <a class="govuk-link" href="./claimant-details#postcode">
-                        {% if data.postcode %}Change{% else %}Add{% endif %}
+                        {% if data.postcode %}Change{% else %}{% endif %}
                       </a>
                   </dd>
               </div>
@@ -137,7 +137,7 @@
 
               <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                      National insurance number
+                      National Insurance number
                   </dt>
                   <dd class="govuk-summary-list__value">
                         PA100000A
