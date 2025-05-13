@@ -72,3 +72,13 @@
       color: #d4351c;
   }
 }
+
+a.red:visited {
+  color: #d4351c;
+}
+
+.govuk-summary-list__key.error {
+  margin: 10px 0px 5px 0px;
+    padding: 5px 0 5px 10px;
+    border-left: 4px solid #d4351c;
+}

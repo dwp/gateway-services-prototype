@@ -5,16 +5,35 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+
+
+                            {{ govukErrorSummary({
+                            titleText: "There is a problem",
+                            errorList: [
+                              {
+                                text: "Enter a first name",
+                                href: "./claimant-details#first_name"
+                              },
+                              {
+                                text: "Enter a postcode",
+                                href: "./claimant-details#postcode"
+                              }
+                            ]
+                            }) }}
+
+
         <h1 class="govuk-heading-l">Claimant details</h1>
 
         <form method="post" action="#">
 
-            <div class="govuk-form-group" id="firstName">
+            <div class="govuk-form-group govuk-form-group--error" id="firstName">
                 <label class="govuk-label" for="first_name">
                     First name
                 </label>
-
-                <input class="govuk-input govuk-input--width-70" id="first_name" name="firstName" type="text" autocomplete="off" value="{{ data.firstName }}" />
+                <p id="full-name-input-error" class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> Enter a first name
+                </p>
+                <input class="govuk-input govuk-input--width-70 govuk-input--error" id="first_name" name="firstName" type="text" autocomplete="off" value="{{ data.firstName }}" />
             </div>
 
             <div class="govuk-form-group">
@@ -30,7 +49,7 @@
                     Last name
                 </label>
 
-                <input class="govuk-input govuk-input--width-35" id="last_name" value="{{ data.lastName }}" name="lastName" type="text" autocomplete="off" />
+                <input class="govuk-input govuk-input--width-35" id="last_name" value="Bloggs" name="lastName" type="text" autocomplete="off" />
             </div>
 
             <div class="govuk-form-group">
@@ -41,12 +60,15 @@
                 <input class="govuk-input govuk-input--width-35" id="requested_name" value="{{ data.requestedName }}" name="requestedName" type="text" autocomplete="off" />
             </div>
 
-            <div class="govuk-form-group">
+            <div class="govuk-form-group govuk-form-group--error">
                 <label class="govuk-label" for="postcode">
                     Postcode
                 </label>
+                <p id="full-name-input-error" class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> Enter a postcode
+                </p>
 
-                <input class="govuk-input govuk-input--width-10" id="postcode" value="{{ data.postcode }}" name="postcode" type="text" autocomplete="off" />
+                <input class="govuk-input govuk-input--width-10 govuk-input--error" id="postcode" value="{{ data.postcode }}" name="postcode" type="text" autocomplete="off" />
             </div>
 
             <div class="govuk-form-group">
@@ -66,7 +88,7 @@
                                     Day
                                 </label>
 
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date_of_birth-Day" value="{{ data['dob-Day'] }}" name="dob-Day" type="text" autocomplete="off" inputmode="numeric" />
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date_of_birth-Day" value="1" name="dob-Day" type="text" autocomplete="off" inputmode="numeric" />
                             </div>
                         </div>
 
@@ -76,7 +98,7 @@
                                     Month
                                 </label>
 
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date_of_birth-Month" value="{{ data['dob-Month'] }}" name="dob-Month" type="text" autocomplete="off" inputmode="numeric" />
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date_of_birth-Month" value="1" name="dob-Month" type="text" autocomplete="off" inputmode="numeric" />
                             </div>
                         </div>
 
@@ -86,7 +108,7 @@
                                     Year
                                 </label>
 
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="date_of_birth-Year" value="{{ data['dob-Year'] }}" name="dob-Year" type="text" autocomplete="off" inputmode="numeric" />
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="date_of_birth-Year" value="1999" name="dob-Year" type="text" autocomplete="off" inputmode="numeric" />
                             </div>
                         </div>
                     </div>
@@ -98,7 +120,7 @@
                     National insurance number
                 </label>
 
-                <input class="govuk-input govuk-input--width-10" id="national_insurance_number" value="{{ data.nino }}" name="nino" type="text" autocomplete="off" />
+                <input class="govuk-input govuk-input--width-10" id="national_insurance_number" value="PA100000A" name="nino" type="text" autocomplete="off" />
             </div>
 
             <div class="govuk-form-group">
@@ -106,7 +128,7 @@
                     Mobile phone number
                 </label>
 
-                <input class="govuk-input govuk-input--width-10" id="mobile_phone" value="{{ data.mobilePhone }}" name="mobilePhone" type="text" value="" autocomplete="off" />
+                <input class="govuk-input govuk-input--width-10" id="mobile_phone" value="07666666565" name="mobilePhone" type="text" value="" autocomplete="off" />
             </div>
 
             <div class="govuk-form-group">
@@ -118,7 +140,7 @@
             </div>
 
             <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" data-govuk-button-init="">
-                Continue
+                Update referral
             </button>
         </form>
     </div>

@@ -223,7 +223,3 @@ router.use("/referral/v2/update/update-claimant-details", (req, res, next) => {
   res.locals.keyDetailsBar = true;
   next();
 });
-
-router.post("/referral/v1/update/claimant-details", function (req, res) {
-  res.redirect("/referral/v1/update/update-claimant-details");
-});
