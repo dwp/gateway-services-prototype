@@ -214,12 +214,56 @@ router.use("/referral/v2/create/confirmation", (req, res, next) => {
 });
 
 //update v2
-router.use("/referral/v2/update/update-referral-details", (req, res, next) => {
-  res.locals.keyDetailsBar = true;
+router.post("/referral/v2/update/claimant-details", function (req, res) {
+  res.redirect("/referral/v2/update/referral-details");
+});
+
+router.post("/referral/v2/update/referral-details", function (req, res) {
+  res.redirect("/referral/v2/update/check-answers");
+});
+
+router.post("/referral/v2/update/confirmation", function (req, res) {
+  req.session.data = {};
+  res.redirect("/referral/v2/update/confirmation");
+});
+
+router.use("/referral/v2/update/confirmation", (req, res, next) => {
+  res.locals.hideBacklink = true;
   next();
 });
 
-router.use("/referral/v2/update/update-claimant-details", (req, res, next) => {
-  res.locals.keyDetailsBar = true;
+router.use("/referral/v2/update/check-answers", (req, res, next) => {
+if (req.query.missing === "claimant-details") {
+  req.session.data = {
+    "firstName": "",
+    "middleNames": "",
+    "lastName": "Bloggs",
+    "requestedName": "",
+    "postcode": "",
+    "dob-Day": "1",
+    "dob-Month": "1",
+    "dob-Year": "1999",
+    "nino": "PA100000A",
+    "mobilePhone": "00000000000",
+    "additionalPhone": "",
+    "benefitType": "ESA",
+    "referralSystemReferralId": "",
+    "claimReferenceNumber": "",
+    "referralType": "NEW_REFERRAL",
+    "ucbInd": "NOT_KNOWN",
+    "mentalHealthInd": "NOT_KNOWN",
+    "referralDate-Day": "1",
+    "referralDate-Month": "1",
+    "referralDate-Year": "2005",
+    "fmeConsentGiven": "YES",
+    "isSrti": "YES",
+    "requiresAdditionalSupport": "YES",
+    "missing": "claimant-details"
+  }
+  res.locals.data = req.session.data
+}
+
   next();
+
+
 });

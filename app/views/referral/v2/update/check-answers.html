@@ -8,9 +8,26 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop">
-        <h1 class="govuk-heading-xl">
-            Referral summary
-        </h1>
+
+
+      {{ govukErrorSummary({
+      titleText: "There are incomplete details",
+      errorList: [
+        {
+          text: "Enter a first name",
+          href: "./claimant-details#first_name"
+        } if not data.firstName,
+        {
+          text: "Enter a postcode",
+          href: "./claimant-details#postcode"
+        } if not data.postcode
+      ]
+      }) if not data.postcode or not data.firstName  }}
+
+      <h1 class="govuk-heading-xl">
+          Referral summary
+      </h1>
+
 
         <h2 class="govuk-heading-=m">
             Claimant details
@@ -18,15 +35,17 @@
 
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
+                <dt class="govuk-summary-list__key {% if not data.firstName %}error{% endif %}">
                     First name
                 </dt>
-                <dd class="govuk-summary-list__value">
-                    {{ data.firstName }}
+                <dd class="govuk-summary-list__value {% if not data.firstName %}missing{% endif %}">
+                  {% if data.firstName %}{{ data.firstName }}{% else %}<a class="govuk-link red" href="./claimant-details#first_name">Enter a first name</a>{% endif %}
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./claimant-details">Change</a>
+                    <a class="govuk-link" href="./claimant-details#first_name">
+                      {% if data.firstName %}Change{% else %}{% endif %}
+                    </a>
                 </dd>
             </div>
 
@@ -76,16 +95,16 @@
             </div>
 
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
+                <dt class="govuk-summary-list__key {% if not data.postcode %}error{% endif %}">
                     Postcode
                 </dt>
-                <dd class="govuk-summary-list__value">
-                      {{ data.postcode }}
+                <dd class="govuk-summary-list__value {% if not data.postcode %}missing{% endif %}">
+                    {% if data.postcode %}{{ data.postcode }}{% else %}<a class="govuk-link red" href="./claimant-details#postcode">Enter a postcode</a>{% endif %}
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./claimant-details">
-                      Change
+                    <a class="govuk-link" href="./claimant-details#postcode">
+                      {% if data.postcode %}Change{% else %}{% endif %}
                     </a>
                 </dd>
             </div>
@@ -311,7 +330,7 @@
 
         <form action="./confirmation" method="post" novalidate="">
             <button type="submit" class="govuk-button" data-module="govuk-button" data-govuk-button-init="">
-                Create referral
+                Update referral
             </button>
         </form>
     </div>
