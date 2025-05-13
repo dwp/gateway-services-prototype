@@ -1,0 +1,127 @@
+{% extends "layouts/dwp-main.html" %}
+
+{% set prevURL = "/" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Claimant details</h1>
+
+        <form method="post" action="#">
+
+            <div class="govuk-form-group" id="firstName">
+                <label class="govuk-label" for="first_name">
+                    First name
+                </label>
+
+                <input class="govuk-input govuk-input--width-70" id="first_name" name="firstName" type="text" autocomplete="off" value="{{ data.firstName }}" />
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="middle_names">
+                    Middle names
+                </label>
+
+                <input class="govuk-input govuk-input--width-35" id="middle_names" value="{{ data.middleNames }}" name="middleNames" type="text" autocomplete="off" />
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="last_name">
+                    Last name
+                </label>
+
+                <input class="govuk-input govuk-input--width-35" id="last_name" value="{{ data.lastName }}" name="lastName" type="text" autocomplete="off" />
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="requested_name">
+                    Preferred name
+                </label>
+
+                <input class="govuk-input govuk-input--width-35" id="requested_name" value="{{ data.requestedName }}" name="requestedName" type="text" autocomplete="off" />
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="postcode">
+                    Postcode
+                </label>
+
+                <input class="govuk-input govuk-input--width-10" id="postcode" value="{{ data.postcode }}" name="postcode" type="text" autocomplete="off" />
+            </div>
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="date_of_birth-hint">
+                    <legend class="govuk-fieldset__legend">
+                        Date of birth
+                    </legend>
+
+                    <div id="date_of_birth-hint" class="govuk-hint">
+                        For example, 12 11 2000
+                    </div>
+
+                    <div class="govuk-date-input" id="date_of_birth">
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="date_of_birth-Day">
+                                    Day
+                                </label>
+
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date_of_birth-Day" value="{{ data['dob-Day'] }}" name="dob-Day" type="text" autocomplete="off" inputmode="numeric" />
+                            </div>
+                        </div>
+
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="date_of_birth-Month">
+                                    Month
+                                </label>
+
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date_of_birth-Month" value="{{ data['dob-Month'] }}" name="dob-Month" type="text" autocomplete="off" inputmode="numeric" />
+                            </div>
+                        </div>
+
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="date_of_birth-Year">
+                                    Year
+                                </label>
+
+                                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="date_of_birth-Year" value="{{ data['dob-Year'] }}" name="dob-Year" type="text" autocomplete="off" inputmode="numeric" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="national_insurance_number">
+                    National insurance number
+                </label>
+
+                <input class="govuk-input govuk-input--width-10" id="national_insurance_number" value="{{ data.nino }}" name="nino" type="text" autocomplete="off" />
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="mobile_phone">
+                    Mobile phone number
+                </label>
+
+                <input class="govuk-input govuk-input--width-10" id="mobile_phone" value="{{ data.mobilePhone }}" name="mobilePhone" type="text" value="" autocomplete="off" />
+            </div>
+
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="additional_phone">
+                    Additional phone number
+                </label>
+
+                <input class="govuk-input govuk-input--width-10" id="additional_phone" value="{{ data.additionalPhone }}" name="additionalPhone" type="text" value="" autocomplete="off" />
+            </div>
+
+            <button type="submit" data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" data-govuk-button-init="">
+                Save and continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
