@@ -1,0 +1,321 @@
+{% extends "layouts/dwp-main.html" %}
+
+{% set prevURL = "./additional-details" %}
+
+{% set dob = (data['dob-Year'] +  "-" + data['dob-Month'] + "-" + data['dob-Day']) %}
+{% set referralDate = (data['referralDate-Year'] +  "-" + data['referralDate-Month'] + "-" + data['referralDate-Day']) %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+        <h1 class="govuk-heading-xl">
+            Summary
+        </h1>
+
+        <h2 class="govuk-heading-=m">
+            Claimant details
+        </h2>
+
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    First name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.firstName }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./claimant-details">Change</a>
+                </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Middle names
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data.middleNames }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./claimant-details">
+                      {% if data.middleNames %}Change{% else %}Add{% endif %}
+                    </a>
+                </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Last name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                      {{ data.lastName }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./claimant-details">
+                      Change
+                    </a>
+                </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Preferred name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                      {{ data.requestedName }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./claimant-details">
+                      {% if data.requestedName %}Change{% else %}Add{% endif %}
+                    </a>
+                </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Postcode
+                </dt>
+                <dd class="govuk-summary-list__value">
+                      {{ data.postcode }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./claimant-details">
+                      Change
+                    </a>
+                </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Date of birth
+                </dt>
+                <dd class="govuk-summary-list__value">
+                      {{ dob | formatDate  }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./claimant-details">
+                      Change
+                    </a>
+                </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    National Insurance number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                      {{ data.nino }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./claimant-details">
+                      Change
+                    </a>
+                </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Mobile phone number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                      {{ data.mobilePhone  }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./contact-details">
+                      Change
+                    </a>
+                </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Additional phone number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                      {{ data.additionalPhone }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./contact-details">
+                      Change
+                    </a>
+                </dd>
+            </div>
+
+<br />
+            <h2 class="govuk-heading-m">
+                Referral details
+            </h2>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Benefit type
+                </dt>
+                <dd class="govuk-summary-list__value">
+                      {{ lang.benefitType[data.benefitType] }}
+                </dd>
+
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="./benefit-type">
+                      Change
+                    </a>
+                </dd>
+            </div>
+
+{% if data.benefitType == 'PIP' %}
+<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Claim reference number
+    </dt>
+    <dd class="govuk-summary-list__value">
+          {{ data.claimReferenceNumber }}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="./benefit-type">
+          {% if data.claimReferenceNumber %}Change{% else %}Add{% endif %}
+        </a>
+    </dd>
+</div>
+{% else %}
+<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+        Referral ID
+    </dt>
+    <dd class="govuk-summary-list__value">
+          {{ data.referralSystemReferralId }}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="./benefit-type">
+            {% if data.referralSystemReferralId %}Change{% else %}Add{% endif %}
+        </a>
+    </dd>
+</div>
+{% endif %}
+
+<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+        Referral type
+    </dt>
+    <dd class="govuk-summary-list__value">
+          {{ lang.referralType[data.referralType] }}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="./referral-type">
+            Change
+        </a>
+    </dd>
+</div>
+
+<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+        Consent for medical evidence
+    </dt>
+    <dd class="govuk-summary-list__value">
+          {{ lang.radio[data.fmeConsentGiven] }}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="./additional-details">
+            Change
+        </a>
+    </dd>
+</div>
+
+<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+        Safety measures
+    </dt>
+    <dd class="govuk-summary-list__value">
+          {{ lang.radio[data.ucbInd] }}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="./additional-details">
+            Change
+        </a>
+    </dd>
+</div>
+
+<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+        Mental health condition
+    </dt>
+    <dd class="govuk-summary-list__value">
+          {{ lang.radio[data.mentalHealthInd] }}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="./additional-details">
+            Change
+        </a>
+    </dd>
+</div>
+
+<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+        Special rules end of life
+    </dt>
+    <dd class="govuk-summary-list__value">
+          {{ lang.radio[data.isSrti] }}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="./additional-details">
+            Change
+        </a>
+    </dd>
+</div>
+
+<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+        Additional needs support
+    </dt>
+    <dd class="govuk-summary-list__value">
+          {{ lang.radio[data.requiresAdditionalSupport] }}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="./additional-details">
+            Change
+        </a>
+    </dd>
+</div>
+
+<div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+        Referral date
+    </dt>
+    <dd class="govuk-summary-list__value">
+          {{ referralDate | formatDate }}
+    </dd>
+
+    <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="./additional-details">
+            Change
+        </a>
+    </dd>
+</div>
+
+        </dl>
+
+        <form action="./confirmation" method="post" novalidate="">
+            <button type="submit" class="govuk-button" data-module="govuk-button" data-govuk-button-init="">
+                Create referral
+            </button>
+        </form>
+    </div>
+</div>
+
+
+  {% endblock %}
