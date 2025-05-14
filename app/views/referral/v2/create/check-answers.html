@@ -19,44 +19,14 @@
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    First name
+                    Full name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.firstName }}
+                    {{ data.firstName }} {{ data.middleNames }} {{ data.lastName }}
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./claimant-details">Change</a>
-                </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Middle names
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  {{ data.middleNames }}
-                </dd>
-
-                <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./claimant-details">
-                      {% if data.middleNames %}Change{% else %}Add{% endif %}
-                    </a>
-                </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Last name
-                </dt>
-                <dd class="govuk-summary-list__value">
-                      {{ data.lastName }}
-                </dd>
-
-                <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./claimant-details">
-                      Change
-                    </a>
+                    <a class="govuk-link" href="./claimant-details#first_name">Change</a>
                 </dd>
             </div>
 
@@ -69,7 +39,7 @@
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./claimant-details">
+                    <a class="govuk-link" href="./claimant-details#requested_name">
                       {% if data.requestedName %}Change{% else %}Add{% endif %}
                     </a>
                 </dd>
@@ -84,7 +54,7 @@
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./claimant-details">
+                    <a class="govuk-link" href="./claimant-details#postcode">
                       Change
                     </a>
                 </dd>
@@ -99,7 +69,7 @@
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./claimant-details">
+                    <a class="govuk-link" href="./claimant-details#date_of_birth-Day">
                       Change
                     </a>
                 </dd>
@@ -114,7 +84,7 @@
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./claimant-details">
+                    <a class="govuk-link" href="./claimant-details#national_insurance_number">
                       Change
                     </a>
                 </dd>
@@ -129,7 +99,7 @@
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./contact-details">
+                    <a class="govuk-link" href="./claimant-details#mobile_phone">
                       Change
                     </a>
                 </dd>
@@ -144,7 +114,7 @@
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./contact-details">
+                    <a class="govuk-link" href="./claimant-details#additional_phone">
                       Change
                     </a>
                 </dd>
@@ -164,7 +134,7 @@
                 </dd>
 
                 <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="./benefit-type">
+                    <a class="govuk-link" href="./referral-details#benefit_type">
                       Change
                     </a>
                 </dd>
@@ -180,7 +150,7 @@
     </dd>
 
     <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="./benefit-type">
+        <a class="govuk-link" href="./referral-details#claim_reference_number">
           {% if data.claimReferenceNumber %}Change{% else %}Add{% endif %}
         </a>
     </dd>
@@ -195,7 +165,7 @@
     </dd>
 
     <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="./benefit-type">
+        <a class="govuk-link" href="./referral-details#referring_system_referral_id">
             {% if data.referralSystemReferralId %}Change{% else %}Add{% endif %}
         </a>
     </dd>
@@ -211,7 +181,7 @@
     </dd>
 
     <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="./referral-type">
+        <a class="govuk-link" href="./referral-details#referral_type">
             Change
         </a>
     </dd>
@@ -226,7 +196,7 @@
     </dd>
 
     <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="./additional-details">
+        <a class="govuk-link" href="./referral-details#fme_consent_given">
             Change
         </a>
     </dd>
@@ -241,7 +211,7 @@
     </dd>
 
     <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="./additional-details">
+        <a class="govuk-link" href="./referral-details#ucb_ind">
             Change
         </a>
     </dd>
@@ -256,7 +226,7 @@
     </dd>
 
     <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="./additional-details">
+        <a class="govuk-link" href="./referral-details#mental_health_ind">
             Change
         </a>
     </dd>
@@ -271,7 +241,7 @@
     </dd>
 
     <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="./additional-details">
+        <a class="govuk-link" href="./referral-details#srti">
             Change
         </a>
     </dd>
@@ -286,7 +256,7 @@
     </dd>
 
     <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="./additional-details">
+        <a class="govuk-link" href="./referral-details#requires_additional_support">
             Change
         </a>
     </dd>
@@ -301,7 +271,7 @@
     </dd>
 
     <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="./additional-details">
+        <a class="govuk-link" href="./referral-details#referral_date-Day">
             Change
         </a>
     </dd>
